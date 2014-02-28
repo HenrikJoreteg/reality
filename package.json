@@ -1,0 +1,28 @@
+{
+  "name": "sim-city",
+  "description": "Simulation runner for using physics simulations in user interfaces",
+  "version": "0.0.0",
+  "author": "Henrik Joreteg <henrik@andyet.net>",
+  "bugs": {
+    "url": "https://github.com/henrikjoreteg/sim-city/issues"
+  },
+  "dependencies": {
+    "newton": "0.0.5"
+  },
+  "homepage": "https://github.com/henrikjoreteg/sim-city",
+  "keywords": [
+    "ui",
+    "browser",
+    "physics",
+    "newton"
+  ],
+  "license": "MIT",
+  "main": "sim-city.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/henrikjoreteg/sim-city"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
