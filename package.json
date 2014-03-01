@@ -1,15 +1,16 @@
 {
-  "name": "sim-city",
+  "name": "simmer",
   "description": "Simulation runner for using physics simulations in user interfaces",
   "version": "0.0.0",
   "author": "Henrik Joreteg <henrik@andyet.net>",
   "bugs": {
-    "url": "https://github.com/henrikjoreteg/sim-city/issues"
+    "url": "https://github.com/henrikjoreteg/simmer/issues"
   },
   "dependencies": {
-    "newton": "0.0.5"
+    "newton": "0.0.5",
+    "wildemitter": "~1.0.1"
   },
-  "homepage": "https://github.com/henrikjoreteg/sim-city",
+  "homepage": "https://github.com/henrikjoreteg/simmer",
   "keywords": [
     "ui",
     "browser",
@@ -17,12 +18,12 @@
     "newton"
   ],
   "license": "MIT",
-  "main": "sim-city.js",
+  "main": "simmer.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/henrikjoreteg/sim-city"
+    "url": "git://github.com/henrikjoreteg/simmer"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   }
 }
