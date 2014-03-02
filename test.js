@@ -1,8 +1,8 @@
 var assert = require('assert');
-var Simmer = require('./simmer');
-var Newton = require('newton');
+var Reality = require('./reality');
+var Newton = require('./newton');
 
-var sim = new Simmer();
+var sim = new Reality();
 
 var p = Newton.Particle(100, 100);
 

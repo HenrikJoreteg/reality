@@ -1,16 +1,16 @@
-// Simmer is a simulation runner for Newton.js designed
+// Reality is a simulation runner for Newton.js designed
 // to be used in rich UI applications (not games) where
 // you want to be able to run simulations until particles
 // you care about have stopped and then automatically
 // halt the simulation.
 
 // The defalt constraints are the window's inner dimensions
-var Newton = require('newton');
+var Newton = require('./newton');
 var root = (typeof window !== 'undefined') ? window : global;
 var WildEmitter = require('wildemitter');
 
 
-function Simmer(spec) {
+function Reality(spec) {
     WildEmitter.call(this);
 
     // our defaults
@@ -35,19 +35,19 @@ function Simmer(spec) {
     }
 }
 
-Simmer.prototype = Object.create(WildEmitter.prototype, {
-    constructor: Simmer
+Reality.prototype = Object.create(WildEmitter.prototype, {
+    constructor: Reality
 });
 
-Simmer.prototype.addSimFunction = function (func) {
+Reality.prototype.addSimFunction = function (func) {
     this.simCallbacks.push(func);
 };
 
-Simmer.prototype.addRenderFunction = function (func) {
+Reality.prototype.addRenderFunction = function (func) {
     this.renderCallbacks.push(func);
 };
 
-Simmer.prototype._render = function () {
+Reality.prototype._render = function () {
     var i = 0;
     var l = this.renderCallbacks.length;
     for (; i < l; i++) {
@@ -56,7 +56,7 @@ Simmer.prototype._render = function () {
 };
 
 // internal simulation callback
-Simmer.prototype._simulate = function (frame, simulator) {
+Reality.prototype._simulate = function (frame, simulator) {
     var self = this;
     var i = 0;
     var l = this.simCallbacks.length;
@@ -84,11 +84,11 @@ Simmer.prototype._simulate = function (frame, simulator) {
     }
 };
 
-Simmer.prototype.isMoving = function (particle) {
+Reality.prototype.isMoving = function (particle) {
     return Math.abs(particle.velocity.x) > 0.01 || Math.abs(particle.velocity.y) > 0.01;
 };
 
-Simmer.prototype.stop = function () {
+Reality.prototype.stop = function () {
     // reset all particle still counters then stop
     this.simulator.particles.forEach(function (particle) {
         delete particle.stillCount;
@@ -97,19 +97,19 @@ Simmer.prototype.stop = function () {
     this.emit('stop');
 };
 
-Simmer.prototype.addAndRun = function (thing) {
+Reality.prototype.addAndRun = function (thing) {
     this.add(thing);
     this.simulator.start();
     this.emit('start');
 };
 
 // Helper for convenience.
-Simmer.prototype.addGravity = function (strength, direction) {
+Reality.prototype.addGravity = function (strength, direction) {
     this.gravity = new Newton.LinearGravity(direction || 0, strength || 0.001);
     this.simulator.add(this.gravity);
 };
 
-Simmer.prototype.add = function (thing) {
+Reality.prototype.add = function (thing) {
     try {
         this.simulator.add(thing);
     } catch (e) {
@@ -117,7 +117,7 @@ Simmer.prototype.add = function (thing) {
     }
 };
 
-Simmer.prototype.getDebugCanvas = function () {
+Reality.prototype.getDebugCanvas = function () {
     if (!root.document) return;
     var canvas = document.createElement('canvas');
     var renderer;
@@ -128,7 +128,7 @@ Simmer.prototype.getDebugCanvas = function () {
     return canvas;
 };
 
-Simmer.prototype.showDebugCanvas = function () {
+Reality.prototype.showDebugCanvas = function () {
     if (!root.document) return;
     var canvas = this.getDebugCanvas();
     canvas.style.position = "fixed";
@@ -138,5 +138,10 @@ Simmer.prototype.showDebugCanvas = function () {
     document.body.appendChild(canvas);
 };
 
+// also expose the bundled working build of newton
+// remove this once fixed on npm.
+Reality.Newton = Newton;
 
-module.exports = Simmer;
+module.exports = Reality;
+
+
